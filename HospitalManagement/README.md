@@ -1,64 +1,36 @@
-# 📱 Social Media Analytics Backend
+# 🏥 Hospital Management Database  
 
 ## 🎯 Objective  
-A PostgreSQL-based project to analyze **user engagement** (likes & comments) on social media posts.  
-Covers schema design, sample data, views, triggers, window functions, and reporting.
-
----
+A SQL-based project designed to manage **patients, doctors, visits, billing, and reports** in a hospital.  
 
 ## 📂 Repository Contents  
-- **social_management.sql** → Full SQL (schema + sample data + views + triggers + rankings + reports)  
-- **social_schema.sql** → Database schema only  
-- **social_views.sql** → Views for top posts & engagement analysis  
-- **social_triggers.sql** → Triggers for updating like counts  
-- **social_rankings.sql** → Ranking queries using window functions  
-- **social_reports.sql** → Report queries (top posts, active users, daily engagement)  
-- **social_reports.xlsx** → Reports in Excel format  
-- **social_reports.pdf** → Reports in PDF format  
+- **hospital_management.sql** → Full SQL (schema + sample data + functions + triggers + reports)  
+- **hospital_schema.sql** → Database schema only  
+- **hospital_functions.sql** → Stored procedure & function  
+- **hospital_triggers.sql** → Triggers for patient discharge & billing update  
+- **hospital_reports.sql** → SQL queries for reporting  
 
----
+## 🛠️ Tools  
+- MySQL
+- MySQL Workbench  
 
 ## 🚀 Features  
-1. **Schema**: Users, Posts, Likes, Comments.  
-2. **Sample Data**: Preloaded dataset with 5 users, multiple posts, likes, and comments.  
-3. **Views**:  
-   - `vw_top_posts_by_likes` → top posts ranked by likes.  
-   - `vw_post_engagement` → engagement score (likes + comments).  
-4. **Window Functions**:  
-   - `vw_post_rankings` → ranks posts using RANK, DENSE_RANK, and ROW_NUMBER.  
+1. **Schema**: Patients, Doctors, Visits, Bills.  
+2. **Sample Data**: Preloaded example records.  
+3. **Stored Procedure**: `GetTotalBillByName` – retrieves the total bill for a patient.  
+4. **Stored Function**: `GetOutstandingBalanceByName` – calculates outstanding balance.  
 5. **Triggers**:  
-   - Auto-update `like_count` in Posts when a like is added or removed.  
+   - `trg_discharge_update` → updates status when a patient is discharged.  
+   - `trg_payment_update` → updates bill status when payment is made.  
 6. **Reports**:  
-   - Post engagement summary.  
-   - Top 5 posts by engagement.  
-   - Daily engagement (likes & comments per day).  
-   - Most active users (by likes + comments).  
-
----
-
-## 📊 Sample Reports  
-- **Excel** → [social_reports.xlsx](social_reports.xlsx)  
-- **PDF** → [social_reports.pdf](social_reports.pdf)  
-
----
+   - Patient visit history  
+   - Doctor’s appointments  
+   - Billing summary  
 
 ## 📌 Usage  
-1. Import `social_management.sql` into PostgreSQL.  
-2. Explore the schema and insert your own test data if needed.  
-3. Example queries:  
-
-```sql
--- Get top posts by engagement
-SELECT * FROM vw_post_rankings ORDER BY rank LIMIT 5;
-
--- See engagement per post
-SELECT * FROM vw_post_engagement;
-
--- Most active users
--- (likes + comments made)
-SELECT u.username, COUNT(l.*) + COUNT(c.*) AS total_interactions
-FROM users u
-LEFT JOIN likes l ON l.user_id = u.user_id
-LEFT JOIN comments c ON c.user_id = u.user_id
-GROUP BY u.username
-ORDER BY total_interactions DESC;
+1. Import `hospital_management.sql` into MySQL.  
+2. Run schema and sample inserts.  
+3. Example calls:  
+   ```sql
+   CALL GetTotalBillByName('Alice Smith');
+   SELECT GetOutstandingBalanceByName('Alice Smith');
