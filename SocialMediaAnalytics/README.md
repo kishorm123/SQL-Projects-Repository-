@@ -13,8 +13,6 @@ Covers schema design, sample data, views, triggers, window functions, and report
 - **social_triggers.sql** → Triggers for updating like counts  
 - **social_rankings.sql** → Ranking queries using window functions  
 - **social_reports.sql** → Report queries (top posts, active users, daily engagement)  
-- **social_reports.xlsx** → Reports in Excel format  
-- **social_reports.pdf** → Reports in PDF format  
 
 ---
 
@@ -33,12 +31,6 @@ Covers schema design, sample data, views, triggers, window functions, and report
    - Top 5 posts by engagement.  
    - Daily engagement (likes & comments per day).  
    - Most active users (by likes + comments).  
-
----
-
-## 📊 Sample Reports  
-- **Excel** → [social_reports.xlsx](social_reports.xlsx)  
-- **PDF** → [social_reports.pdf](social_reports.pdf)  
 
 ---
 
